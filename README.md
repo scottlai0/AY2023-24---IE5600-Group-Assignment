@@ -10,3 +10,15 @@ git init .
 git remote add origin https://github.com/scottlai0/AY2023-24---IE5600-Group-Assignment
 git pull
 ```
+
+### To check which branch your are at
+```
+git branch
+```
+
+## Pushing changes to your branch
+```
+git add .
+git commit -m "<your message>"
+git push
+```
