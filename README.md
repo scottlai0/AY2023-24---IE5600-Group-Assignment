@@ -11,9 +11,14 @@ git remote add origin https://github.com/scottlai0/AY2023-24---IE5600-Group-Assi
 git pull
 ```
 
-### To check which branch your are at
+### To check which branch you are at
 ```
 git branch
+```
+
+### To check which branch you are at
+```
+git checkout <branch_name>
 ```
 
 ## Pushing changes to your branch
