@@ -16,7 +16,7 @@ git pull
 git branch
 ```
 
-### To check which branch you are at
+### To switch to another branch
 ```
 git checkout <branch_name>
 ```
