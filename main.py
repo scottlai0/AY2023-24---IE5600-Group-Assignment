@@ -9,6 +9,8 @@ class LocationNode:
 class Menu:
 
     feedback = []
+    isOperating = False
+
     def __init__(self, name, address, start_time = None, end_time = None) -> None:
         self.name = name
         self.address = address
@@ -19,11 +21,27 @@ class Menu:
         comment_id = len(self.feedback) + 1
         self.feedback.append({comment_id: comment})
 
+    def openShop(self) -> None:
+        self.isOperating = True
 
+    def closeShop(self) -> None:
+        self.isOperating = False
+
+        
 class MenuItem:
+    sold_out = False
+
     def __init__(self, item_name, price) -> None:
         self.item_name = item_name
         self.price = price
+    
+    def enableStock(self) -> None:
+        self.sold_out = False
+
+    def disableStock(self) -> None:
+        self.sold_out = True
+
+    
 
 class Food(MenuItem):
     def __init__(self, item_name, price) -> None:
