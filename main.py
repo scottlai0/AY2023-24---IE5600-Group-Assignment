@@ -1,74 +1,47 @@
-class LocationNode:
-    lattitude: float = None
-    longitude: float = None
-
-    def __init__(self, lattitude, longitude) -> None:
-        self.lattitude = lattitude
-        self.longitude = longitude
-
-class Menu:
-
-    feedback = []
-    isOperating = False
-
-    def __init__(self, name, address, start_time = None, end_time = None) -> None:
+class Node:
+    name: str
+    next: list
+    
+    def __init__(self, name):
         self.name = name
-        self.address = address
-        self.start_time = start_time
-        self.end_time = end_time
+        self.next = []
 
-    def addComment(self, comment: str) -> None:
-        comment_id = len(self.feedback) + 1
-        self.feedback.append({comment_id: comment})
-
-    def openShop(self) -> None:
-        self.isOperating = True
-
-    def closeShop(self) -> None:
-        self.isOperating = False
-
-        
-class MenuItem:
-    sold_out = False
-
-    def __init__(self, item_name, price) -> None:
-        self.item_name = item_name
-        self.price = price
+    def addPath(self, nextNode: Node, distance: int):
+        self.nextNode.append({nextNode: distance})
     
-    def enableStock(self) -> None:
-        self.sold_out = False
+    def toString(self):
+        if len(self.nextNode) == 0:
+            print(f"{self.name} is a sink.")
+        else:
+            print(f"{self.name}")
 
-    def disableStock(self) -> None:
-        self.sold_out = True
 
+class Queue():
+    
+    def __init__(self):
+        self._items = list([])
+       
+    
+    def empty(self):
+        return self.size() == 0
+    
+    
+    def size(self): 
+        return len(self._items)                
     
 
-class Food(MenuItem):
-    def __init__(self, item_name, price) -> None:
-        super().__init__(item_name, price)
-
-class Drink(MenuItem):
-    def __init__(self, item_name, price) -> None:
-        super().__init__(item_name, price)
-
-
-class Cart:
-    items: list = []
-
-    def addItem(self, menu_item: MenuItem, quantity: int = 1) -> None:
-        item = {'name': menu_item, 'quantity': quantity}
-        list.append(item)
-
-    def updateQuantity(self, menu_item: MenuItem, quantity: int) -> None:
-        for item in self.items:
-            if item['name'] == menu_item:
-                item['quantity'] = quantity
-            break
-
-    def deleteItem(self, menu_item: MenuItem) -> None:
-        for item in self.items:
-            if item['name'] == menu_item:
-                self.items.remove(item)
+    def enqueue(self, x):        
+        self._items.insert(0, x)
+    
+    
+    def dequeue(self):        
+        if not self.empty():            
+            return self._items.pop()    
+        return None
+    
+    
+    def toString(self):        
+        return str(self._items)
 
 
 if __name__ == "__main__":
