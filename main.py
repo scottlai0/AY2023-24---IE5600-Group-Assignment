@@ -1,26 +1,26 @@
 
 class Vertex:
     
-    def __init__(self, key):
-        self.key = key
-        self.adjacentList = list([])
+    def __init__(self, name):
+        self.name = name
+        self.adjacentList = []
 
     def addNeighbour(self, neighbour, weight=0):        
         neighbourExist = False
 
         for adjacentItem in self.adjacentList:
-            if adjacentItem[0].key == neighbour.key:
+            if adjacentItem['vertex'].name == neighbour.name:
                 neighbourExist = True
                 break
 
         if not neighbourExist:
-            self.adjacentList.append((neighbour, weight))
+            self.adjacentList.append({'vertex': neighbour, 'distance': weight})
     
     def toString(self):    
         strData = str(self.key)
     
         for adjacentVertex in self.adjacentList:        
-            strData += ' -> ' + str(adjacentVertex[0].key) + ':' + str(adjacentVertex[1])
+            strData += ' -> ' + str(adjacentVertex['vertex'].key) + ':' + str(adjacentVertex['distance'])
 
         return strData
 
