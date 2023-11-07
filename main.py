@@ -64,7 +64,7 @@ class Dispatcher:
             },
             8: {
                 'command': 'Generate Sample Customers',
-                'function': self.generateCouriers
+                'function': self.generateCustomers
             },
             9: {
                 'command': 'View Order Queue',
@@ -109,7 +109,13 @@ class Dispatcher:
         return
         
     
-    def generateCouriers(self, num_of_couriers: int) -> None:
+    def generateCouriers(self) -> None:
+        try:
+            num_of_couriers = int(input('Enter number of couriers to generate: '))
+        except ValueError:
+            print('ERROR: Input is not an integer!')
+            return
+        
         if self.num_of_couriers > 0:
             cfm = input('This will overwrite existing courier data. Continue (Y/N)?').lower()
             
@@ -126,6 +132,8 @@ class Dispatcher:
             exec(f"""print(courier{i}.toString())""")
             exec(f"self.list_of_couriers.append(courier{i})")
             print() 
+            
+        print('-' * (len(title_str) + (2*side_spaces)))
         return
 
 
@@ -150,7 +158,13 @@ class Dispatcher:
     def modifyCustomerDetails(self) -> None:
         return
     
-    def generateCustomers(self, num_of_customers):
+    def generateCustomers(self) -> None:
+        try:
+            num_of_customers = int(input('Enter number of customers to generate: '))
+        except ValueError:
+            print('ERROR: Input is not an integer!')
+            return
+        
         if self.num_of_customers > 0:
             cfm = input('This will overwrite existing customer data. Continue (Y/N)?').lower()
             if cfm == 'N': return
@@ -161,8 +175,11 @@ class Dispatcher:
             print(f"Customer {i} created:")
             exec(f"""customer{i} = Customer(name='C{i}', gender='{genders[rnd_gender_idx]}', address=None)""")
             exec(f"""print(customer{i}.toString())""")
-            exec(f"""list_of_customers.append(customer{i})""")
+            exec(f"""self.list_of_customers.append(customer{i})""")
             print()
+            
+        print('-' * (len(title_str) + (2*side_spaces)))
+        return
     
     def generateOrderQueue(self, queue_size: int):
         for i in range(queue_size):
@@ -173,6 +190,7 @@ class Dispatcher:
     def viewMap(self) -> None:
         return
         
+
 if __name__ == "__main__":
     # Title
     print('=' * len(title_formatted))
