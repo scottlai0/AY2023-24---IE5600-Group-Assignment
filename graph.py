@@ -16,10 +16,10 @@ class Vertex:
             self.adjacentList.append({'vertex': neighbour, 'distance': weight})
     
     def toString(self):    
-        strData = str(self.key)
+        strData = str(self.name)
     
         for adjacentVertex in self.adjacentList:        
-            strData += ' -> ' + str(adjacentVertex['vertex'].key) + ':' + str(adjacentVertex['distance'])
+            strData += ' -> ' + str(adjacentVertex['vertex'].name) + ':' + str(adjacentVertex['distance'])
 
         return strData
 
@@ -63,6 +63,7 @@ class Graph():
         return False
 
 import string
+import pickle
 
 def generateMapOfLumbridgeAndAlKharid() -> Graph:
     sample_graph = Graph()
@@ -71,7 +72,7 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
     print('Vertex start_point created. and added to graph.')
     
     # Generate vertices from A to V
-    for letter in list(string.ascii_lowercase)[:-4]:
+    for letter in list(string.ascii_lowercase)[:-5]:
         exec(f"""sample_graph.addVertex('{letter.upper()}')""")
         print(f"""Vertex {letter.upper()} created. and added to graph.""")
     print()
@@ -81,8 +82,8 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
     sample_graph.addEdge('A','start_point', 5)
     
     print('V <-> A edge created.')
-    sample_graph.addEdge('A','V', 10)
-    sample_graph.addEdge('V','A', 10)
+    sample_graph.addEdge('A','U', 10)
+    sample_graph.addEdge('U','A', 10)
 
     print('M <-> A edge created.')
     sample_graph.addEdge('A','M', 30)
@@ -204,5 +205,7 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
 
 if __name__ == "__main__":
     sample_graph = generateMapOfLumbridgeAndAlKharid()
-    
-    
+    with open('./saved_data/sample_graph.map','wb+') as f:
+        pickle.dump(sample_graph, f)
+        print('> Saved Graph.')
+    f.close()

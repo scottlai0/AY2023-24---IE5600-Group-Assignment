@@ -38,7 +38,7 @@ class Dispatcher:
         try:
             with open('./saved_data/customers.txt','rb') as f:
                 self.list_of_customers = pickle.load(f)
-                print('> Last saved Customers data has been data.')
+                print('> Last saved Customers data has been loaded.')
         except FileNotFoundError:
             self.list_of_customers = []
                     
@@ -46,7 +46,13 @@ class Dispatcher:
         self.courierQueue = Queue()
         
         self.vertices = []
-        self.currentMap = Graph()
+        
+        try:
+            with open('./saved_data/sample_graph.map','rb') as f:
+                self.currentMap = pickle.load(f)
+                print('> Last saved Graph data has been loaded.')
+        except FileNotFoundError:
+            self.currentMap = Graph()
         
         self.commands = {
             1: {
@@ -90,7 +96,7 @@ class Dispatcher:
                  'function': None
             },
             11: {
-                'command': 'View Area of Coverage (Map)',
+                'command': 'View Graph Adjacency List',
                 'function': self.viewMap
             },
             12: {
@@ -212,6 +218,10 @@ class Dispatcher:
             print(f" {i+1}: {rnd_choice.getName()} - {rnd_choice.getAddress().name} added to queue")
     
     def viewMap(self) -> None:
+        for v in self.currentMap.vertices.values():
+            print(v.toString())
+            
+        print('-' * (len(title_str) + (2*side_spaces)))
         return
         
     
