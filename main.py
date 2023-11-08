@@ -29,14 +29,14 @@ class Dispatcher:
         self.num_of_customers = 0
         
         try:
-            with open('./saved_data/couriers.txt','rb') as f:
+            with open('./saved_data/couriers.dat','rb') as f:
                 self.list_of_couriers = pickle.load(f)
                 print('> Last saved Couriers data has been loaded.')
         except FileNotFoundError:
             self.list_of_couriers = []
         
         try:
-            with open('./saved_data/customers.txt','rb') as f:
+            with open('./saved_data/customers.dat','rb') as f:
                 self.list_of_customers = pickle.load(f)
                 print('> Last saved Customers data has been loaded.')
         except FileNotFoundError:
@@ -226,11 +226,11 @@ class Dispatcher:
         
     
     def saveAllChanges(self) -> None:
-        with open('./saved_data/customers.txt','wb+') as f:
+        with open('./saved_data/customers.dat','wb+') as f:
             pickle.dump(self.list_of_customers, f)
             print('> Customer data saved.')
             
-        with open('./saved_data/couriers.txt','wb+') as f:
+        with open('./saved_data/couriers.dat','wb+') as f:
             pickle.dump(self.list_of_couriers, f)
             print('> Courier data saved.')
         
