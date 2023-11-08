@@ -3,6 +3,7 @@ from order import Order
 from people import Customer, Courier
 from graph import Graph, Vertex
 import random
+import pickle
 
 title_str = 'PyDispatcher CLI'
 side_spaces = 30
@@ -16,21 +17,35 @@ class Dispatcher:
     num_of_customers: int
     list_of_customers: list
     
+    vertices: list
     currentMap: Graph
     
     orderQueue: Queue
     courierQueue: Queue
     
     def __init__(self):
+        print('Intializing...')
         self.num_of_couriers = 0
         self.num_of_customers = 0
         
-        self.list_of_customers = []
-        self.list_of_couriers = []
+        try:
+            with open('./saved_data/couriers.txt','rb') as f:
+                self.list_of_couriers = pickle.load(f)
+                print('> Last saved Couriers data has been loaded.')
+        except FileNotFoundError:
+            self.list_of_couriers = []
         
+        try:
+            with open('./saved_data/customers.txt','rb') as f:
+                self.list_of_customers = pickle.load(f)
+                print('> Last saved Customers data has been data.')
+        except FileNotFoundError:
+            self.list_of_customers = []
+                    
         self.orderQueue = Queue()
         self.courierQueue = Queue()
         
+        self.vertices = []
         self.currentMap = Graph()
         
         self.commands = {
@@ -82,10 +97,19 @@ class Dispatcher:
                 'command': 'View Dispatching Schedule',
                 'function': None
             },
+            13: {
+                 'command': 'Load All Data from File'
+            },
+            13:{
+                'command': 'Save All Changes',
+                'function': self.saveAllChanges
+            },
             0: {
                 'command': 'Exit'
             }
         }
+        
+        print('-' * (len(title_str) + (2*side_spaces)))
      
     def addCourier(self, name: str, gender: str, age: int, max_order_capacity: int) -> None:
         if len(self.list_of_couriers) == 0 or name not in [x.getName() for x in self.list_of_couriers]:
@@ -190,7 +214,19 @@ class Dispatcher:
     def viewMap(self) -> None:
         return
         
-
+    
+    def saveAllChanges(self) -> None:
+        with open('./saved_data/customers.txt','wb+') as f:
+            pickle.dump(self.list_of_customers, f)
+            print('> Customer data saved.')
+            
+        with open('./saved_data/couriers.txt','wb+') as f:
+            pickle.dump(self.list_of_couriers, f)
+            print('> Courier data saved.')
+        
+        print('-' * (len(title_str) + (2*side_spaces)))
+        return
+    
 if __name__ == "__main__":
     # Title
     print('=' * len(title_formatted))
