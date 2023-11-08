@@ -61,3 +61,13 @@ class Graph():
         if key in self.vertices.keys():     
             return True
         return False
+
+import string
+
+if __name__ == "__main__":
+    start = Vertex('Start Point')
+    # Generate vertices from A to V
+    for letter in list(string.ascii_lowercase)[:-4]:
+        exec(f"""vertex_{letter.upper()} = Vertex('{letter}')""")
+    
+    
