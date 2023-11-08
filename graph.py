@@ -65,9 +65,15 @@ class Graph():
 import string
 
 if __name__ == "__main__":
-    start = Vertex('Start Point')
+    sample_graph = Graph()
+    start_point = Vertex('Start Point')
+    sample_graph.addVertex(start_point)
+    print('Start point created and added to graph')
+    
     # Generate vertices from A to V
     for letter in list(string.ascii_lowercase)[:-4]:
         exec(f"""vertex_{letter.upper()} = Vertex('{letter}')""")
+        exec(f"""sample_graph.addVertex(vertex_{letter.upper()})""")
+        print(f"""Vertex {letter.upper()} created and added to graph.""")
     
     
