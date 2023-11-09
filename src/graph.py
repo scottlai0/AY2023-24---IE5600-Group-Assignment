@@ -89,6 +89,10 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
     sample_graph.addEdge('A','M', 30)
     sample_graph.addEdge('M','A', 30)
     
+    print('U <-> T edge created.')
+    sample_graph.addEdge('U','T', 55)
+    sample_graph.addEdge('T','U', 55)
+    
     print('B <-> A edge created.')
     sample_graph.addEdge('A','B', 10)
     sample_graph.addEdge('B','A', 10)
@@ -96,6 +100,10 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
     print('M <-> N edge created.')
     sample_graph.addEdge('M','N', 25)
     sample_graph.addEdge('N','M', 25)
+    
+    print('N <-> T edge created.')
+    sample_graph.addEdge('N','T', 65)
+    sample_graph.addEdge('T','N', 65)
     
     print('M <-> O edge created.')
     sample_graph.addEdge('M','O', 30)
@@ -138,12 +146,12 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
     sample_graph.addEdge('L','T', 25)
     
     print('L <-> H edge created.')
-    sample_graph.addEdge('L','H', 120)
-    sample_graph.addEdge('H','L', 120)
+    sample_graph.addEdge('L','H', 55)
+    sample_graph.addEdge('H','L', 55)
     
     print('L <-> K edge created.')
-    sample_graph.addEdge('L','K', 100)
-    sample_graph.addEdge('K','L', 100)
+    sample_graph.addEdge('L','K', 50)
+    sample_graph.addEdge('K','L', 50)
     
     print('K <-> H edge created.')
     sample_graph.addEdge('H','K', 10)
@@ -200,6 +208,10 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
     print('B <-> C edge created.')
     sample_graph.addEdge('C','B', 15)
     sample_graph.addEdge('B','C', 15)
+    
+    print('B <-> L edge created.')
+    sample_graph.addEdge('L','B', 60)
+    sample_graph.addEdge('B','L', 60)
     
     return sample_graph
 
