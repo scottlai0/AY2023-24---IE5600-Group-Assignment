@@ -1,10 +1,10 @@
 class Person:
-    def __init__(self, name: str, gender: str):
-        self.name = name
+    def __init__(self, id: str, gender: str):
+        self.id = id
         self.gender = gender
     
-    def getName(self):
-        return self.name
+    def getID(self):
+        return self.id
     
     def getGender(self):
         return self.gender
@@ -12,23 +12,23 @@ class Person:
     
 
 class Customer(Person):
-    def __init__(self, name: str, gender: str, address):
-        super().__init__(name, gender)
+    def __init__(self, id: str, gender: str, address):
+        super().__init__(id, gender)
         self.address = address
         
     def getAddress(self):
         return self.address
     
     def toString(self):
-        return f"""{self.getName()} - {self.getGender()} - Vertex {self.getAddress().name}"""
+        return f"""{self.getID()} - {self.getGender()} - Vertex {self.getAddress().name}"""
         
 
 class Courier(Person):
     orderList = []
     max_order_capacity: int
     
-    def __init__(self, name: str, gender: str, age: int, max_order_capacity: int):
-        super().__init__(name, gender)
+    def __init__(self, id: str, gender: str, age: int, max_order_capacity: int):
+        super().__init__(id, gender)
         self.age = age
         self.max_order_capacity = max_order_capacity
                 
@@ -45,5 +45,5 @@ class Courier(Person):
     
     def toString(self):
         nl = '\n'
-        return f"Name: {self.getName()}{nl}Gender: {self.getGender()}{nl}Age: {self.getAge()}{nl}Max Order Carrying Capacity: {self.getMaxOrderCapacity()}"
+        return f"id: {self.getID()}{nl}Gender: {self.getGender()}{nl}Age: {self.getAge()}{nl}Max Order Carrying Capacity: {self.getMaxOrderCapacity()}"
         

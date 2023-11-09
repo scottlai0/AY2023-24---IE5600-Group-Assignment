@@ -24,7 +24,7 @@ class Dispatcher:
     courierQueue: Queue
     
     def __init__(self):
-        print('Intializing...')
+        print('> Intializing...')
         
         try:
             with open('./saved_data/couriers.dat','rb') as f:
@@ -56,6 +56,8 @@ class Dispatcher:
             with open('./saved_data/sample_graph.map','rb') as f:
                 self.currentMap = pickle.load(f)
                 print('> Last saved Graph data has been loaded.')
+                f.close()
+                
         except FileNotFoundError:
             self.currentMap = Graph()
         
@@ -73,36 +75,36 @@ class Dispatcher:
                 'function': self.modifyCourierDetails
             },
             4: {
-                'command': 'Generate Sample Couriers',
-                'function': self.generateCouriers
-            },
-            5: {
-                'command': 'View All Couriers',
-                'function': self.viewAllCouriers
-            },
-            6: {
                 'command': 'Add Customer',
                 'function': self.addCustomer
             },
-            7: {
+            5: {
                 'command': 'Delete Customer',
                 'function': self.deleteCustomer
             },
-            8: {
+            6: {
                 'command': 'Modify Customer Details',
                 'function': self.modifyCustomerDetails
             },
-            9: {
+            7: {
+                'command': 'Generate Sample Couriers',
+                'function': self.generateCouriers
+            },
+            8: {
                 'command': 'Generate Sample Customers',
                 'function': self.generateCustomers
             },
-            10:{
+            9: {
+                'command': 'Generate Orders',
+                'function': self.generateOrderQueue
+            },
+            10: {
+                'command': 'View All Couriers',
+                'function': self.viewAllCouriers
+            },
+            11:{
                 'command': 'View All Customers',
                 'function': self.viewAllCustomers
-            },
-            11: {
-                'command': 'Generate Orders',
-                'function': None
             },
             12: {
                  'command': 'View Order Queue',
@@ -128,7 +130,7 @@ class Dispatcher:
         print('-' * (len(title_str) + (2*side_spaces)))
      
     def addCourier(self, name: str, gender: str, age: int, max_order_capacity: int) -> None:
-        if len(self.list_of_couriers) == 0 or name not in [x.getName() for x in self.list_of_couriers]:
+        if len(self.list_of_couriers) == 0 or name not in [x.getID() for x in self.list_of_couriers]:
             newCourier = Courier(name, gender, age, max_order_capacity)
             self.list_of_couriers.append(newCourier)
             self.num_of_couriers += 1
@@ -139,7 +141,7 @@ class Dispatcher:
     def deleteCourier(self) -> None:
         courier_name = input('Enter Courier ID to be deleted: ')
         for courier in self.list_of_couriers:
-            if courier.getName() == courier_name:
+            if courier.getID() == courier_name:
                 self.list_of_couriers.remove(courier)                
                 return
         
@@ -170,7 +172,7 @@ class Dispatcher:
             rnd_age = random.randrange(18, 50)
             rnd_order_capacity = random.randrange(2,5)
             print(f"Courier {i} created:")
-            exec(f"""courier{i} = Courier(name='D{i}', gender='{genders[rnd_gender_idx]}', age={rnd_age}, max_order_capacity={rnd_order_capacity})""")
+            exec(f"""courier{i} = Courier(id='D{i}', gender='{genders[rnd_gender_idx]}', age={rnd_age}, max_order_capacity={rnd_order_capacity})""")
             exec(f"""print(courier{i}.toString())""")
             exec(f"self.list_of_couriers.append(courier{i})")
             print() 
@@ -189,7 +191,7 @@ class Dispatcher:
         return
 
     def addCustomer(self, name: str, gender: str, address: Vertex) -> None:
-        if len(self.list_of_customers) == 0 or name not in [x.getName() for x in self.list_of_customers]:
+        if len(self.list_of_customers) == 0 or name not in [x.getID() for x in self.list_of_customers]:
             newCustomer = Customer(name, gender, address)
             self.list_of_customers.append(newCustomer)
             self.num_of_customers += 1
@@ -199,7 +201,7 @@ class Dispatcher:
     
     def deleteCustomer(self, customer_name: str) -> None:
         for customer in self.list_of_customers:
-            if customer.getName() == customer_name:
+            if customer.getID() == customer_name:
                 self.list_of_customers.remove(customer)                
                 return
         
@@ -230,7 +232,7 @@ class Dispatcher:
             rnd_gender_idx = random.randint(0,1)
             rnd_vertex = random.choice(all_vertices)
             print(f"Customer {i} created:")
-            exec(f"""customer{i} = Customer(name='C{i}', gender='{genders[rnd_gender_idx]}', address=rnd_vertex)""")
+            exec(f"""customer{i} = Customer(id='C{i}', gender='{genders[rnd_gender_idx]}', address=rnd_vertex)""")
             exec(f"""print(customer{i}.toString())""")
             exec(f"""self.list_of_customers.append(customer{i})""")
             print()
@@ -248,11 +250,18 @@ class Dispatcher:
         print('-' * (len(title_str) + (2*side_spaces)))
         return
 
-    def generateOrderQueue(self, queue_size: int):
-        for i in range(queue_size):
-            rnd_choice = random.choice(self.list_of_customers)
-            self.orderQueue.enqueue(rnd_choice)
-            print(f" {i+1}: {rnd_choice.getName()} - {rnd_choice.getAddress().name} added to queue")
+    def generateOrderQueue(self):
+        try:
+            queue_size = int(input('> Enter Order Queue size: '))
+            for i in range(queue_size):
+                rnd_choice = random.choice(self.list_of_customers)
+                self.orderQueue.enqueue(rnd_choice)
+                print(f" {i+1}: {rnd_choice.getID()} - Vertex {rnd_choice.getAddress().name} added to queue")
+        except ValueError:
+            print('ERROR: Input is not an integer!')
+            
+        print('-' * (len(title_str) + (2*side_spaces)))
+        return
     
     def viewMap(self) -> None:
         for v in self.currentMap.vertices.values():
