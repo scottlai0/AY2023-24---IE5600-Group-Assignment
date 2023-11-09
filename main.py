@@ -25,22 +25,27 @@ class Dispatcher:
     
     def __init__(self):
         print('Intializing...')
-        self.num_of_couriers = 0
-        self.num_of_customers = 0
         
         try:
             with open('./saved_data/couriers.dat','rb') as f:
                 self.list_of_couriers = pickle.load(f)
                 print('> Last saved Couriers data has been loaded.')
+                f.close()
+                self.num_of_couriers = len(self.list_of_couriers)
         except FileNotFoundError:
             self.list_of_couriers = []
+            self.num_of_couriers = 0
+
         
         try:
             with open('./saved_data/customers.dat','rb') as f:
                 self.list_of_customers = pickle.load(f)
                 print('> Last saved Customers data has been loaded.')
+                f.close()
+                self.num_of_customers = len(self.list_of_customers)
         except FileNotFoundError:
             self.list_of_customers = []
+            self.num_of_customers = 0
                     
         self.orderQueue = Queue()
         self.courierQueue = Queue()
@@ -72,41 +77,46 @@ class Dispatcher:
                 'function': self.generateCouriers
             },
             5: {
+                'command': 'View All Couriers',
+                'function': self.viewAllCouriers
+            },
+            6: {
                 'command': 'Add Customer',
                 'function': self.addCustomer
             },
-            6: {
+            7: {
                 'command': 'Delete Customer',
                 'function': self.deleteCustomer
             },
-            7: {
+            8: {
                 'command': 'Modify Customer Details',
                 'function': self.modifyCustomerDetails
             },
-            8: {
+            9: {
                 'command': 'Generate Sample Customers',
                 'function': self.generateCustomers
             },
-            9: {
-                'command': 'View Order Queue',
-                'function': None
-            },
-            10: {
-                 'command': 'Generate Orders',
-                 'function': None
+            10:{
+                'command': 'View All Customers',
+                'function': self.viewAllCustomers
             },
             11: {
+                'command': 'Generate Orders',
+                'function': None
+            },
+            12: {
+                 'command': 'View Order Queue',
+                 'function': None
+            },
+            13: {
                 'command': 'View Graph Adjacency List',
                 'function': self.viewMap
             },
-            12: {
+            14: {
                 'command': 'View Dispatching Schedule',
                 'function': None
             },
-            13: {
-                 'command': 'Load All Data from File'
-            },
-            13:{
+            15:{
                 'command': 'Save All Changes',
                 'function': self.saveAllChanges
             },
@@ -126,7 +136,8 @@ class Dispatcher:
             print('ERROR: Courier name already exists. Please use a different name.')
         return
     
-    def deleteCourier(self, courier_name: str) -> None:
+    def deleteCourier(self) -> None:
+        courier_name = input('Enter Courier ID to be deleted: ')
         for courier in self.list_of_couriers:
             if courier.getName() == courier_name:
                 self.list_of_couriers.remove(courier)                
@@ -136,7 +147,7 @@ class Dispatcher:
         return
     
     def modifyCourierDetails(self) -> None:
-        return
+        courer = input('> Enter Courier ID ')
         
     
     def generateCouriers(self) -> None:
@@ -147,11 +158,12 @@ class Dispatcher:
             return
         
         if self.num_of_couriers > 0:
-            cfm = input('This will overwrite existing courier data. Continue (Y/N)?').lower()
+            cfm = input('This will overwrite existing courier data. Continue (Y/N)? ').lower()
             
             if cfm == 'N': return
             
         self.num_of_couriers = num_of_couriers
+        self.list_of_couriers = []
         
         for i in range(1, num_of_couriers+1):
             rnd_gender_idx = random.randint(0,1)
@@ -165,7 +177,16 @@ class Dispatcher:
             
         print('-' * (len(title_str) + (2*side_spaces)))
         return
-
+    
+    def viewAllCouriers(self) -> None:
+        if self.num_of_couriers == 0:
+            print('> NO DATA FOUND.')
+        else:            
+            for courier in self.list_of_couriers:
+                print(courier.toString(),'\n')
+                
+        print('-' * (len(title_str) + (2*side_spaces)))
+        return
 
     def addCustomer(self, name: str, gender: str, address: Vertex) -> None:
         if len(self.list_of_customers) == 0 or name not in [x.getName() for x in self.list_of_customers]:
@@ -196,21 +217,37 @@ class Dispatcher:
             return
         
         if self.num_of_customers > 0:
-            cfm = input('This will overwrite existing customer data. Continue (Y/N)?').lower()
+            cfm = input('This will overwrite existing customer data. Continue (Y/N)? ').lower()
             if cfm == 'N': return
-            
+        
+        self.num_of_customers = num_of_customers
+        self.list_of_customers = []
+        
+        all_vertices = list(self.currentMap.vertices.values())[1:]
+        
         self.num_of_customers = num_of_customers
         for i in range(1, num_of_customers+1):
             rnd_gender_idx = random.randint(0,1)
+            rnd_vertex = random.choice(all_vertices)
             print(f"Customer {i} created:")
-            exec(f"""customer{i} = Customer(name='C{i}', gender='{genders[rnd_gender_idx]}', address=None)""")
+            exec(f"""customer{i} = Customer(name='C{i}', gender='{genders[rnd_gender_idx]}', address=rnd_vertex)""")
             exec(f"""print(customer{i}.toString())""")
             exec(f"""self.list_of_customers.append(customer{i})""")
             print()
             
         print('-' * (len(title_str) + (2*side_spaces)))
         return
-    
+
+    def viewAllCustomers(self) -> None:
+        if self.num_of_customers == 0:
+            print('> NO DATA FOUND.')
+        else:            
+            for customer in self.list_of_customers:
+                print(customer.toString())
+
+        print('-' * (len(title_str) + (2*side_spaces)))
+        return
+
     def generateOrderQueue(self, queue_size: int):
         for i in range(queue_size):
             rnd_choice = random.choice(self.list_of_customers)
@@ -228,11 +265,13 @@ class Dispatcher:
     def saveAllChanges(self) -> None:
         with open('./saved_data/customers.dat','wb+') as f:
             pickle.dump(self.list_of_customers, f)
-            print('> Customer data saved.')
+            print('> Customer data saved in /saved_data/customers.dat.')
+            f.close()
             
         with open('./saved_data/couriers.dat','wb+') as f:
             pickle.dump(self.list_of_couriers, f)
-            print('> Courier data saved.')
+            print('> Courier data saved in /saved_data/couriers.dat.')
+            f.close()
         
         print('-' * (len(title_str) + (2*side_spaces)))
         return

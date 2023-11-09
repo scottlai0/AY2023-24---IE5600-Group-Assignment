@@ -20,7 +20,7 @@ class Customer(Person):
         return self.address
     
     def toString(self):
-        return f"""{self.getName()} - {self.getGender()} - {self.getAddress()}"""
+        return f"""{self.getName()} - {self.getGender()} - Vertex {self.getAddress().name}"""
         
 
 class Courier(Person):
