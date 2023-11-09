@@ -27,7 +27,7 @@ class Dispatcher:
         print('> Intializing...')
         
         try:
-            with open('./saved_data/couriers.dat','rb') as f:
+            with open('../data/couriers.dat','rb') as f:
                 self.list_of_couriers = pickle.load(f)
                 print('> Last saved Couriers data has been loaded.')
                 f.close()
@@ -38,7 +38,7 @@ class Dispatcher:
 
         
         try:
-            with open('./saved_data/customers.dat','rb') as f:
+            with open('../data/customers.dat','rb') as f:
                 self.list_of_customers = pickle.load(f)
                 print('> Last saved Customers data has been loaded.')
                 f.close()
@@ -53,7 +53,7 @@ class Dispatcher:
         self.vertices = []
         
         try:
-            with open('./saved_data/sample_graph.map','rb') as f:
+            with open('../data/sample_graph.map','rb') as f:
                 self.currentMap = pickle.load(f)
                 print('> Last saved Graph data has been loaded.')
                 f.close()
@@ -272,14 +272,14 @@ class Dispatcher:
         
     
     def saveAllChanges(self) -> None:
-        with open('./saved_data/customers.dat','wb+') as f:
+        with open('../data/customers.dat','wb+') as f:
             pickle.dump(self.list_of_customers, f)
-            print('> Customer data saved in /saved_data/customers.dat.')
+            print('> Customer data saved in /data/customers.dat.')
             f.close()
             
-        with open('./saved_data/couriers.dat','wb+') as f:
+        with open('../data/couriers.dat','wb+') as f:
             pickle.dump(self.list_of_couriers, f)
-            print('> Courier data saved in /saved_data/couriers.dat.')
+            print('> Courier data saved in /data/couriers.dat.')
             f.close()
         
         print('-' * (len(title_str) + (2*side_spaces)))

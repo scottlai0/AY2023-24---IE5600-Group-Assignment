@@ -205,7 +205,7 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
 
 if __name__ == "__main__":
     sample_graph = generateMapOfLumbridgeAndAlKharid()
-    with open('./saved_data/sample_graph.map','wb+') as f:
+    with open('../data/sample_graph.map','wb+') as f:
         pickle.dump(sample_graph, f)
         print('> Saved Graph.')
     f.close()
