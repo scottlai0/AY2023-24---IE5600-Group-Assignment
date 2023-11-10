@@ -4,6 +4,8 @@ from people import Customer, Courier
 from graph import Graph, Vertex
 import random
 import pickle
+import sys
+from heapq import heapify, heappush, heappop
 
 title_str = 'PyDispatcher CLI'
 side_spaces = 30
@@ -285,6 +287,49 @@ class Dispatcher:
         print('-' * (len(title_str) + (2*side_spaces)))
         return
     
+    
+def dijkstra(graph, src, dest):
+    
+    graph = sample_graph
+    src = 'start_point'
+    dest = 'R'
+    
+    # Infinite cost
+    inf = sys.maxsize
+    
+    # Create cost - predecessor dict for each vertex
+    vertex_data  = {x.name: {'cost': inf, 'pred': [] } for x in list(graph.vertices.values())}
+    
+    # Start point will have 0 distance
+    vertex_data[src]['cost'] = 0
+    visited = []
+    
+    temp = src
+    
+    while True:
+        if temp not in visited:
+            visited.append(temp)
+            min_heap = []
+            for neighbour in graph.vertices[temp].adjacentList:
+                neighbour_name = neighbour['vertex'].name
+                print(temp, neighbour_name)
+                if neighbour_name not in visited:
+                    cost = vertex_data[temp]['cost'] + neighbour['distance']
+                    if cost < vertex_data[neighbour_name]['cost']:
+                        vertex_data[neighbour_name]['cost'] = cost
+                        vertex_data[neighbour_name]['pred'] = vertex_data[temp]['pred'] + [temp]
+                        
+                    # Create min heap
+                    heappush(min_heap, (vertex_data[neighbour_name]['cost'], neighbour_name))
+                                
+        # Sets minimum value at the top of the tree
+        heapify(min_heap)
+        temp = min_heap[0][1]   # 0 gives the lowest cost, 1 gives neighbour name
+    
+    print(f"Shortest Distance: {str(vertex_data[dest]['cost'])}, Route: {' -> '.join(vertex_data[dest]['pred'])}")
+    
+    return
+
 if __name__ == "__main__":
     # Title
     print('=' * len(title_formatted))
