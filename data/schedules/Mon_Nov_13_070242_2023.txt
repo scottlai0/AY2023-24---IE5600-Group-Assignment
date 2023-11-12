@@ -1,0 +1,258 @@
+> List of Couriers:
+  - Courier ID: D1, Name: D1_name, Gender: M, Age: 19, Max Order Carrying Capacity: 4
+  - Courier ID: D2, Name: D2_name, Gender: F, Age: 33, Max Order Carrying Capacity: 2
+  - Courier ID: D3, Name: D3_name, Gender: M, Age: 24, Max Order Carrying Capacity: 4
+  - Courier ID: D4, Name: D4_name, Gender: M, Age: 45, Max Order Carrying Capacity: 2
+  - Courier ID: D5, Name: D5_name, Gender: M, Age: 23, Max Order Carrying Capacity: 2
+
+> List of Customers:
+  - Customer ID: C1, Name: C1_name, Gender: M, Vertex: Q
+  - Customer ID: C2, Name: C2_name, Gender: M, Vertex: R
+  - Customer ID: C3, Name: C3_name, Gender: M, Vertex: U
+  - Customer ID: C4, Name: C4_name, Gender: F, Vertex: H
+  - Customer ID: C5, Name: C5_name, Gender: F, Vertex: S
+  - Customer ID: C6, Name: C6_name, Gender: F, Vertex: A
+  - Customer ID: C7, Name: C7_name, Gender: M, Vertex: N
+  - Customer ID: C8, Name: C8_name, Gender: F, Vertex: I
+  - Customer ID: C9, Name: C9_name, Gender: M, Vertex: G
+  - Customer ID: C10, Name: C10_name, Gender: F, Vertex: D
+  - Customer ID: C11, Name: C11_name, Gender: M, Vertex: M
+  - Customer ID: C12, Name: C12_name, Gender: M, Vertex: L
+  - Customer ID: C13, Name: C13_name, Gender: F, Vertex: T
+  - Customer ID: C14, Name: C14_name, Gender: F, Vertex: B
+  - Customer ID: C15, Name: C15_name, Gender: F, Vertex: R
+  - Customer ID: C16, Name: C16_name, Gender: M, Vertex: M
+  - Customer ID: C17, Name: C17_name, Gender: M, Vertex: R
+  - Customer ID: C18, Name: C18_name, Gender: F, Vertex: U
+  - Customer ID: C19, Name: C19_name, Gender: F, Vertex: S
+  - Customer ID: C20, Name: C20_name, Gender: M, Vertex: C
+  - Customer ID: C21, Name: C21_name, Gender: M, Vertex: H
+  - Customer ID: C22, Name: C22_name, Gender: F, Vertex: C
+  - Customer ID: C23, Name: C23_name, Gender: M, Vertex: D
+  - Customer ID: C24, Name: C24_name, Gender: F, Vertex: I
+  - Customer ID: C25, Name: C25_name, Gender: F, Vertex: U
+  - Customer ID: C26, Name: C26_name, Gender: F, Vertex: F
+  - Customer ID: C27, Name: C27_name, Gender: F, Vertex: L
+  - Customer ID: C28, Name: C28_name, Gender: M, Vertex: I
+  - Customer ID: C29, Name: C29_name, Gender: M, Vertex: T
+  - Customer ID: C30, Name: C30_name, Gender: M, Vertex: R
+
+Dispatch #1:
+> Assigned Courier: D1 (D1_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #1; Address: Vertex H
+  - Order #2; Address: Vertex H
+  - Order #3; Address: Vertex Q
+  - Order #4; Address: Vertex I
+> start_point -> A -> B -> C -> D -> H* -> L -> M -> O -> Q* -> O -> M -> A -> B -> C -> D -> F -> G -> I* -> G -> F -> D -> C -> B -> A -> start_point
+> Total Distance: 420
+
+Dispatch #2:
+> Assigned Courier: D2 (D2_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #5; Address: Vertex G
+  - Order #6; Address: Vertex I
+> start_point -> A -> B -> C -> D -> F -> G* -> I* -> G* -> F -> D -> C -> B -> A -> start_point
+> Total Distance: 140
+
+Dispatch #3:
+> Assigned Courier: D3 (D3_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #7; Address: Vertex I
+  - Order #8; Address: Vertex S
+  - Order #9; Address: Vertex I
+  - Order #10; Address: Vertex H
+> start_point -> A -> B -> C -> D -> F -> G -> I* -> K -> L -> T -> S* -> T -> L -> H* -> D -> C -> B -> A -> start_point
+> Total Distance: 343
+
+Dispatch #4:
+> Assigned Courier: D4 (D4_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #11; Address: Vertex C
+  - Order #12; Address: Vertex I
+> start_point -> A -> B -> C* -> D -> F -> G -> I* -> G -> F -> D -> C* -> B -> A -> start_point
+> Total Distance: 140
+
+Dispatch #5:
+> Assigned Courier: D5 (D5_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #13; Address: Vertex T
+  - Order #14; Address: Vertex U
+> start_point -> A -> U* -> T* -> U* -> A -> start_point
+> Total Distance: 140
+
+Dispatch #6:
+> Assigned Courier: D1 (D1_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #15; Address: Vertex U
+  - Order #16; Address: Vertex S
+  - Order #17; Address: Vertex B
+  - Order #18; Address: Vertex R
+> start_point -> A -> U* -> T -> S* -> T -> U* -> A -> B* -> A -> M -> O -> P -> R* -> P -> O -> M -> A -> start_point
+> Total Distance: 354
+
+Dispatch #7:
+> Assigned Courier: D2 (D2_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #19; Address: Vertex Q
+  - Order #20; Address: Vertex U
+> start_point -> A -> M -> O -> Q* -> O -> M -> A -> U* -> A -> start_point
+> Total Distance: 180
+
+Dispatch #8:
+> Assigned Courier: D3 (D3_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #21; Address: Vertex N
+  - Order #22; Address: Vertex I
+  - Order #23; Address: Vertex R
+  - Order #24; Address: Vertex C
+> start_point -> A -> M -> N* -> M -> A -> B -> C* -> D -> F -> G -> I* -> K -> L -> T -> S -> R* -> P -> O -> M -> A -> start_point
+> Total Distance: 400
+
+Dispatch #9:
+> Assigned Courier: D4 (D4_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #25; Address: Vertex Q
+  - Order #26; Address: Vertex U
+> start_point -> A -> M -> O -> Q* -> O -> M -> A -> U* -> A -> start_point
+> Total Distance: 180
+
+Dispatch #10:
+> Assigned Courier: D5 (D5_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #27; Address: Vertex N
+  - Order #28; Address: Vertex D
+> start_point -> A -> M -> N* -> M -> A -> B -> C -> D* -> C -> B -> A -> start_point
+> Total Distance: 210
+
+Dispatch #11:
+> Assigned Courier: D1 (D1_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #29; Address: Vertex H
+  - Order #30; Address: Vertex D
+  - Order #31; Address: Vertex U
+  - Order #32; Address: Vertex B
+> start_point -> A -> B* -> C -> D* -> H* -> D* -> C -> B* -> A -> U* -> A -> start_point
+> Total Distance: 160
+
+Dispatch #12:
+> Assigned Courier: D2 (D2_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #33; Address: Vertex I
+  - Order #34; Address: Vertex R
+> start_point -> A -> B -> C -> D -> F -> G -> I* -> K -> L -> T -> S -> R* -> P -> O -> M -> A -> start_point
+> Total Distance: 290
+
+Dispatch #13:
+> Assigned Courier: D3 (D3_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #35; Address: Vertex S
+  - Order #36; Address: Vertex G
+  - Order #37; Address: Vertex F
+  - Order #38; Address: Vertex I
+> start_point -> A -> U -> T -> S* -> T -> L -> K -> G* -> F* -> G* -> I* -> G* -> F* -> D -> C -> B -> A -> start_point
+> Total Distance: 282
+
+Dispatch #14:
+> Assigned Courier: D4 (D4_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #39; Address: Vertex Q
+  - Order #40; Address: Vertex U
+> start_point -> A -> M -> O -> Q* -> O -> M -> A -> U* -> A -> start_point
+> Total Distance: 180
+
+Dispatch #15:
+> Assigned Courier: D5 (D5_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #41; Address: Vertex F
+  - Order #42; Address: Vertex A
+> start_point -> A* -> B -> C -> D -> F* -> D -> C -> B -> A* -> start_point
+> Total Distance: 120
+
+Dispatch #16:
+> Assigned Courier: D1 (D1_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #43; Address: Vertex D
+  - Order #44; Address: Vertex B
+  - Order #45; Address: Vertex M
+  - Order #46; Address: Vertex G
+> start_point -> A -> B* -> C -> D* -> C -> B* -> A -> M* -> A -> B* -> C -> D* -> F -> G* -> F -> D* -> C -> B* -> A -> start_point
+> Total Distance: 280
+
+Dispatch #17:
+> Assigned Courier: D2 (D2_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #47; Address: Vertex S
+  - Order #48; Address: Vertex N
+> start_point -> A -> U -> T -> S* -> T -> N* -> M -> A -> start_point
+> Total Distance: 235
+
+Dispatch #18:
+> Assigned Courier: D3 (D3_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #49; Address: Vertex U
+  - Order #50; Address: Vertex M
+  - Order #51; Address: Vertex H
+  - Order #52; Address: Vertex U
+> start_point -> A -> U* -> A -> M* -> L -> H* -> D -> C -> B -> A -> start_point
+> Total Distance: 220
+
+Dispatch #19:
+> Assigned Courier: D4 (D4_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #53; Address: Vertex T
+  - Order #54; Address: Vertex H
+> start_point -> A -> U -> T* -> L -> H* -> D -> C -> B -> A -> start_point
+> Total Distance: 220
+
+Dispatch #20:
+> Assigned Courier: D5 (D5_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #55; Address: Vertex L
+  - Order #56; Address: Vertex I
+> start_point -> A -> B -> L* -> K -> I* -> G -> F -> D -> C -> B -> A -> start_point
+> Total Distance: 203
+
+Dispatch #21:
+> Assigned Courier: D1 (D1_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #57; Address: Vertex L
+  - Order #58; Address: Vertex C
+  - Order #59; Address: Vertex G
+  - Order #60; Address: Vertex F
+> start_point -> A -> B -> L* -> B -> C* -> D -> F* -> G* -> F* -> D -> C* -> B -> A -> start_point
+> Total Distance: 250
+
+Dispatch #22:
+> Assigned Courier: D2 (D2_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #61; Address: Vertex R
+  - Order #62; Address: Vertex I
+> start_point -> A -> M -> O -> P -> R* -> S -> T -> L -> K -> I* -> G -> F -> D -> C -> B -> A -> start_point
+> Total Distance: 290
+
+Dispatch #23:
+> Assigned Courier: D3 (D3_name); Max Order Capacity: 4
+> Dispatch Address (Vertex Name):
+  - Order #63; Address: Vertex R
+  - Order #64; Address: Vertex U
+  - Order #65; Address: Vertex H
+  - Order #66; Address: Vertex R
+> start_point -> A -> M -> O -> P -> R* -> P -> O -> M -> A -> U* -> A -> B -> C -> D -> H* -> D -> C -> B -> A -> start_point
+> Total Distance: 314
+
+Dispatch #24:
+> Assigned Courier: D4 (D4_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #67; Address: Vertex T
+  - Order #68; Address: Vertex U
+> start_point -> A -> U* -> T* -> U* -> A -> start_point
+> Total Distance: 140
+
+Dispatch #25:
+> Assigned Courier: D5 (D5_name); Max Order Capacity: 2
+> Dispatch Address (Vertex Name):
+  - Order #69; Address: Vertex U
+> start_point -> A -> U* -> A -> start_point
+> Total Distance: 30
+

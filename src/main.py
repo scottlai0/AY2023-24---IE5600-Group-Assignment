@@ -232,7 +232,7 @@ class Dispatcher:
             
         self.num_of_couriers = num_of_couriers
         self.list_of_couriers = []
-        self.courierQueue.empty()
+        self.courierQueue._items = []
         
         for i in range(1, num_of_couriers+1):
             rnd_gender_idx = random.randint(0,1)
@@ -396,7 +396,7 @@ class Dispatcher:
         
         self.num_of_customers = num_of_customers
         self.list_of_customers = []
-        self.orderQueue.empty()
+        self.orderQueue._items = []
         
         all_vertices = list(self.currentMap.vertices.values())[1:]
         
@@ -431,7 +431,7 @@ class Dispatcher:
                     raise ValueError
         
                 if replace_check == 'replace':
-                    self.orderQueue.empty()
+                    self.orderQueue._items = []
                     
                 max_order_id = self.orderQueue._items[0].id
                 
@@ -489,12 +489,24 @@ class Dispatcher:
         if self.orderQueue.getQueueSize() == 0:
             print('Order Queue is empty!')
         else:
-            check = input('The current order queue will be emptied to generate the schedule. Are you sure you want to continue (Y/N)?: ').lower()
+            check = input('The current order queue will be emptied to generate the schedule. Continue (Y/N)?: ').lower()
+            print()
             if check == 'n': 
                 print('-' * (len(title_str) + (2*side_spaces)))
                 return
             
             to_print = ''
+            
+            to_print += '> List of Couriers:\n'
+            for courier in self.list_of_couriers:
+                to_print += f"  - {courier.toString()}\n"        
+            to_print += '\n'
+            
+            to_print += '> List of Customers:\n'
+            for customer in self.list_of_customers:
+                to_print += f"  - {customer.toString()}\n"
+            to_print += '\n'
+            
             dispatch_id = 1
             while self.orderQueue.getQueueSize() > 0:
                 courier = self.courierQueue.dequeue()
