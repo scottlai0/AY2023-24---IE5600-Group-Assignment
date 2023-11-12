@@ -1,10 +1,16 @@
+from graph import Vertex
+
 class Person:
-    def __init__(self, id: str, gender: str):
+    def __init__(self, id: str, name: str, gender: str):
         self.id = id
+        self.name = name
         self.gender = gender
     
     def getID(self):
         return self.id
+    
+    def getName(self):
+        return self.name
     
     def getGender(self):
         return self.gender
@@ -12,23 +18,24 @@ class Person:
     
 
 class Customer(Person):
-    def __init__(self, id: str, gender: str, address):
-        super().__init__(id, gender)
+    def __init__(self, id: str, name: str, gender: str, address: Vertex):
+        super().__init__(id, name, gender)
         self.address = address
         
     def getAddress(self):
         return self.address
     
     def toString(self):
-        return f"""{self.getID()} - {self.getGender()} - Vertex {self.getAddress().name}"""
+        return f"""Customer ID: {self.getID()}, Name: {self.getName()}, Gender: {self.getGender()}, Vertex: {self.getAddress().name}"""
         
 
 class Courier(Person):
-    orderList = []
+    max_order_capacity: int
+    age: int
     max_order_capacity: int
     
-    def __init__(self, id: str, gender: str, age: int, max_order_capacity: int):
-        super().__init__(id, gender)
+    def __init__(self, id: str, name: str, gender: str, age: int, max_order_capacity: int):
+        super().__init__(id, name, gender)
         self.age = age
         self.max_order_capacity = max_order_capacity
                 
@@ -44,6 +51,5 @@ class Courier(Person):
         return self.max_order_capacity
     
     def toString(self):
-        nl = '\n'
-        return f"id: {self.getID()}{nl}Gender: {self.getGender()}{nl}Age: {self.getAge()}{nl}Max Order Carrying Capacity: {self.getMaxOrderCapacity()}"
+        return f"Courier ID: {self.getID()}, Name: {self.getName()}, Gender: {self.getGender()}, Age: {self.getAge()}, Max Order Carrying Capacity: {self.getMaxOrderCapacity()}"
         

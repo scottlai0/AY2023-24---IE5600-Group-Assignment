@@ -16,6 +16,9 @@ class Queue:
         if not self.empty():            
             return self._items.pop()    
         return None
+    
+    def getQueueSize(self):
+        return len(self._items)
        
     def toString(self):        
         return str(self._items)

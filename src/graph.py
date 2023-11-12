@@ -1,3 +1,6 @@
+import string
+import pickle
+
 class Vertex:
     
     def __init__(self, name):
@@ -62,10 +65,8 @@ class Graph():
             return True
         return False
 
-import string
-import pickle
 
-def generateMapOfLumbridgeAndAlKharid() -> Graph:
+def generateMap() -> Graph:
     sample_graph = Graph()
     print('> Creating Vertices...')
     sample_graph.addVertex('start_point')
@@ -216,7 +217,7 @@ def generateMapOfLumbridgeAndAlKharid() -> Graph:
     return sample_graph
 
 if __name__ == "__main__":
-    sample_graph = generateMapOfLumbridgeAndAlKharid()
+    sample_graph = generateMap()
     with open('../data/sample_graph.map','wb+') as f:
         pickle.dump(sample_graph, f)
         print('> Saved Graph.')
