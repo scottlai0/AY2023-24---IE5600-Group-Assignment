@@ -501,10 +501,9 @@ class Dispatcher:
                 delivery_vertices_names = [x.destination.name for x in orders]
                 
                 
-                
                 to_print += f"Dispatch #{dispatch_id}:\n"
                 to_print += f"> Assigned Courier: {courier.getID()} ({courier.getName()}); Max Order Capacity: {courier.getMaxOrderCapacity()}\n"
-                to_print += '> Dispatch Address (Vertex Name):'
+                to_print += '> Dispatch Address (Vertex Name)\n:'
                 for order in orders:
                     to_print += f"  - Order #{order.id}; Address: Vertex {order.destination.name}\n"
                 
@@ -517,13 +516,13 @@ class Dispatcher:
                 self.courierQueue.enqueue(courier)
                 dispatch_id += 1
         
-        print(to_print)
-        curr_time = time.ctime().replace(' ','_').replace(':','')
-        with open(f"../data/schedules/{curr_time}.txt",'w+') as f:
-            f.write(to_print)
-            print(f"Dispatch Schedule saved to /data/schedules/{curr_time}.txt")
-            f.close()
-            
+            print(to_print)
+            curr_time = time.ctime().replace(' ','_').replace(':','')
+            with open(f"../data/schedules/{curr_time}.txt",'w+') as f:
+                f.write(to_print)
+                print(f"Dispatch Schedule saved to /data/schedules/{curr_time}.txt")
+                f.close()
+        
         print('-' * (len(title_str) + (2*side_spaces)))
         return
     
@@ -531,6 +530,11 @@ class Dispatcher:
         schedules_path = os.path.dirname(os.path.abspath(__file__ + "/../")) + "\data\schedules"
         schedules = {id: filename for id, filename in enumerate(os.listdir(schedules_path), 1)}
 
+        if len(schedules) == 0: 
+            print('/data/schedules directory is empty.')
+            print('-' * (len(title_str) + (2*side_spaces)))
+            return
+        
         for s in schedules.items():
             print(f"{s[0]}: {s[1]}")
         
