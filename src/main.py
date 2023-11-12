@@ -232,6 +232,7 @@ class Dispatcher:
             
         self.num_of_couriers = num_of_couriers
         self.list_of_couriers = []
+        self.courierQueue.empty()
         
         for i in range(1, num_of_couriers+1):
             rnd_gender_idx = random.randint(0,1)
@@ -241,8 +242,9 @@ class Dispatcher:
             exec(f"""courier{i} = Courier(id='D{i}', name='D{i}_name', gender='{genders[rnd_gender_idx]}', age={rnd_age}, max_order_capacity={rnd_order_capacity})""")
             exec(f"""print(courier{i}.toString())""")
             exec(f"self.list_of_couriers.append(courier{i})")
+            exec(f"self.courierQueue.enqueue(courier{i})")
             print() 
-            
+        
         print('-' * (len(title_str) + (2*side_spaces)))
         return
     
@@ -389,11 +391,12 @@ class Dispatcher:
             return
         
         if self.num_of_customers > 0:
-            cfm = input('This will overwrite existing customer data. Continue (Y/N)? ').lower()
+            cfm = input('This will overwrite existing customer data and empty the current order queue. Continue (Y/N)? ').lower()
             if cfm == 'N': return
         
         self.num_of_customers = num_of_customers
         self.list_of_customers = []
+        self.orderQueue.empty()
         
         all_vertices = list(self.currentMap.vertices.values())[1:]
         
@@ -486,6 +489,11 @@ class Dispatcher:
         if self.orderQueue.getQueueSize() == 0:
             print('Order Queue is empty!')
         else:
+            check = input('The current order queue will be emptied to generate the schedule. Are you sure you want to continue (Y/N)?: ').lower()
+            if check == 'n': 
+                print('-' * (len(title_str) + (2*side_spaces)))
+                return
+            
             to_print = ''
             dispatch_id = 1
             while self.orderQueue.getQueueSize() > 0:
@@ -503,7 +511,7 @@ class Dispatcher:
                 
                 to_print += f"Dispatch #{dispatch_id}:\n"
                 to_print += f"> Assigned Courier: {courier.getID()} ({courier.getName()}); Max Order Capacity: {courier.getMaxOrderCapacity()}\n"
-                to_print += '> Dispatch Address (Vertex Name)\n:'
+                to_print += '> Dispatch Address (Vertex Name):\n'
                 for order in orders:
                     to_print += f"  - Order #{order.id}; Address: Vertex {order.destination.name}\n"
                 
