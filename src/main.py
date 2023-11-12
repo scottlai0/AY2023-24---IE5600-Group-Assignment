@@ -567,17 +567,23 @@ if __name__ == "__main__":
             print(f"{k}: {v}")
             
         keys = list(cmds.keys())
-      
-        cmd = int(input('> Input command number from the list above: '))
-        print('-' * (len(title_str) + (2*side_spaces)))
-
-        if cmd not in keys: 
-            raise ValueError           
-        
-        if cmd == 0: 
-            print('Exiting...')
-            break
-        
-        else:
-            print(f">> {dp.commands[cmd]['command']}")
-            data = dp.commands[cmd]['function']()
+        try:
+            cmd = int(input('> Input command number from the list above: '))
+            print('-' * (len(title_str) + (2*side_spaces)))
+    
+            if cmd not in keys: 
+                raise ValueError
+            
+            if cmd == 0: 
+                print('Exiting...')
+                break
+            
+            else:
+                print(f">> {dp.commands[cmd]['command']}")
+                data = dp.commands[cmd]['function']()
+                
+        except ValueError:
+            print('-' * (len(title_str) + (2*side_spaces)))
+            print('ERROR: Invalid Input. Only input the numbers from the list above.')
+            print('-' * (len(title_str) + (2*side_spaces)))
+            
