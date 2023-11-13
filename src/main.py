@@ -496,6 +496,8 @@ class Dispatcher:
                 return
             
             to_print = ''
+            curr_time = time.ctime()
+            to_print += f"Schedule Generated on: {curr_time}\n{'-' * (len(title_str) + (2*side_spaces))}\n"
             
             to_print += '> List of Couriers:\n'
             for courier in self.list_of_couriers:
@@ -505,7 +507,7 @@ class Dispatcher:
             to_print += '> List of Customers:\n'
             for customer in self.list_of_customers:
                 to_print += f"  - {customer.toString()}\n"
-            to_print += '\n'
+            to_print += f"\n{'-' * (len(title_str) + (2*side_spaces))}\n"
             
             dispatch_id = 1
             while self.orderQueue.getQueueSize() > 0:

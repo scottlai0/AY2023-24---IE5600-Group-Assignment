@@ -1,3 +1,5 @@
+Schedule Generated on: Mon Nov 13 07:07:54 2023
+----------------------------------------------------------------------------
 > List of Couriers:
   - Courier ID: D1, Name: D1_name, Gender: M, Age: 19, Max Order Carrying Capacity: 4
   - Courier ID: D2, Name: D2_name, Gender: F, Age: 33, Max Order Carrying Capacity: 2
@@ -37,6 +39,7 @@
   - Customer ID: C29, Name: C29_name, Gender: M, Vertex: T
   - Customer ID: C30, Name: C30_name, Gender: M, Vertex: R
 
+----------------------------------------------------------------------------
 Dispatch #1:
 > Assigned Courier: D1 (D1_name); Max Order Capacity: 4
 > Dispatch Address (Vertex Name):
