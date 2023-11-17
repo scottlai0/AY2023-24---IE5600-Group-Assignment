@@ -2,7 +2,7 @@ Group number: 19
 
 Members:
 Lai Jun Guo, Scott	A0166840B	e0175273@u.nus.edu	96337766
-Liu Boyang (Leader)	A0285190B
+Liu Boyang (Leader)	A0285190B boyangliu@u.nus.edu
 Luo Ziheng		A
 Yang Tongjun		A
 Zheng Xuebei		A0285293U
